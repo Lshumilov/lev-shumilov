@@ -102,6 +102,23 @@
   .hero__me { display: flex; align-items: center; gap: var(--v-5); margin-bottom: var(--v-5); }
   .hero__me img { width: clamp(5rem, 9vw, 8rem); aspect-ratio: 1; border-radius: 50%; border: 3px solid var(--v-ink); object-fit: cover; flex: none; }
   .hero .phone { position: absolute; }
+  /* «без сайта» → «с сайтом»: линза-круг вокруг курсора показывает сайт только внутри себя; на телефоне – касание или прокрутка */
+  .hero .phone { pointer-events: auto; }
+  .hero .phone > img.alt { position: absolute; left: calc(var(--w) * .035); top: calc(var(--w) * .035); width: calc(100% - var(--w) * .07); height: calc(100% - var(--w) * .07); border-radius: calc(var(--w) * .11); object-fit: cover;
+    -webkit-mask-image: radial-gradient(circle at var(--lx, -999px) var(--ly, -999px), #000 var(--lr, 0px), transparent calc(var(--lr, 0px) + 1.5px));
+            mask-image: radial-gradient(circle at var(--lx, -999px) var(--ly, -999px), #000 var(--lr, 0px), transparent calc(var(--lr, 0px) + 1.5px)); }
+  .lens { position: fixed; left: 0; top: 0; z-index: 8; width: calc(var(--lens-r, 150px) * 2); height: calc(var(--lens-r, 150px) * 2); margin: calc(var(--lens-r, 150px) * -1) 0 0 calc(var(--lens-r, 150px) * -1); border-radius: 50%; border: 3px solid var(--v-ink); box-shadow: 0 0 0 3px rgb(255 248 220 / .85), 0 10px 28px rgb(27 31 59 / .3); pointer-events: none; opacity: 0; transform: translate(var(--lx0, -999px), var(--ly0, -999px)) scale(.6); transition: opacity .18s var(--v-ease-out); will-change: transform; }
+  .lens.on { opacity: 1; }
+  .hero__sticker { max-width: 17rem; text-align: center; }
+  .hero__sticker .st-b, .hero.is-lens .hero__sticker .st-a, .hero.is-site .hero__sticker .st-a { display: none; }
+  .hero.is-lens .hero__sticker .st-b, .hero.is-site .hero__sticker .st-b { display: inline; }
+  .hero__sticker .st-coarse { display: none; }
+  @media (pointer: coarse) {
+    .hero__sticker .st-fine { display: none; } .hero__sticker .st-coarse { display: inline; }
+    .lens { display: none; }
+    .hero .phone > img.alt { -webkit-mask-image: none; mask-image: none; opacity: 0; transition: opacity .35s var(--v-ease-out); }
+    .hero.is-site .phone > img.alt { opacity: 1; }
+  }
   .hero .p1 { --w: min(20vw, 17.5rem); right: 7vw; top: 20vh; transform: rotate(5deg); }
   .hero .p2 { --w: min(17vw, 15rem); right: 28vw; top: 44vh; transform: rotate(-6deg); }
   .hero .p3 { --w: min(14vw, 12.5rem); right: 1.5vw; top: 58vh; transform: rotate(9deg); }
@@ -112,12 +129,13 @@
     .hero .hd--xl { font-size: clamp(1.45rem, 7.2vw, 2.6rem); }
     .hero .v-lede { font-size: var(--v-t-base); }
     .hero__act { margin-top: var(--v-5); }
-    .hero__sticker { display: none; }
+    .hero { --p1b: -5vh; }
+    .hero__sticker { display: block; right: auto; left: var(--v-gutter); top: auto; bottom: calc(42vw * 2.164 + var(--p1b) + .3rem); transform: rotate(-2deg); font-size: .78rem; max-width: 16.5rem; padding: .4em .8em; }
     .hero .p1 { --w: 42vw; right: 5vw; top: auto; bottom: -5vh; }
     .hero .p2 { --w: 36vw; right: auto; left: 4vw; top: auto; bottom: -12vh; }
     .hero .p3 { display: none; }
   }
-  @media (max-width: 860px) and (max-height: 700px) { .hero .p1, .hero .p2 { bottom: -22vh; } }
+  @media (max-width: 860px) and (max-height: 700px) { .hero { --p1b: -22vh; } .hero .p1, .hero .p2 { bottom: -22vh; } }
 
   /* ---- 2. зачем сайт ------------------------------------------------------ */
   .why__txt { position: absolute; z-index: 3; left: var(--v-gutter); top: 50%; transform: translateY(-50%); width: min(46vw, 38rem); display: grid; }
@@ -293,10 +311,11 @@
     <section class="hero" data-v-act="pin" data-v-span="2.3" aria-label="Лев Шумилов">
       <div data-v-stage>
         <div class="hero__disc" aria-hidden="true"></div>
-        <div class="v-layer" data-v-parallax="-0.35" aria-hidden="true"><div class="phone p1"><img src="assets/ph-kafe.webp" alt="" width="520" height="1125"></div></div>
-        <div class="v-layer" data-v-parallax="-0.9" aria-hidden="true"><div class="phone p2"><img src="assets/ph-kafe-menu.webp" alt="" width="520" height="1125"></div></div>
-        <div class="v-layer" data-v-parallax="-0.6" aria-hidden="true"><div class="phone p3"><img src="assets/ph-kafe-coffee.webp" alt="" width="520" height="1125"></div></div>
-        <div class="hero__sticker sticker v-layer-none" aria-hidden="true">открывается с телефона</div>
+        <div class="v-layer" data-v-parallax="-0.35" aria-hidden="true"><div class="phone p1"><img src="assets/ph-nosite-card.webp" alt="" width="520" height="1125"><img class="alt" src="assets/ph-kafe.webp" alt="" width="520" height="1125"></div></div>
+        <div class="v-layer" data-v-parallax="-0.9" aria-hidden="true"><div class="phone p2"><img src="assets/ph-nosite-otzyvy.webp" alt="" width="520" height="1125"><img class="alt" src="assets/ph-kafe-menu.webp" alt="" width="520" height="1125"></div></div>
+        <div class="v-layer" data-v-parallax="-0.6" aria-hidden="true"><div class="phone p3"><img src="assets/ph-nosite-chat.webp" alt="" width="520" height="1125"><img class="alt" src="assets/ph-kafe-coffee.webp" alt="" width="520" height="1125"></div></div>
+        <div class="lens" id="lens" aria-hidden="true"></div>
+        <div class="hero__sticker sticker v-layer-none" aria-hidden="true"><span class="st-a"><span class="st-fine">наведите курсор на телефон:</span><span class="st-coarse">коснитесь телефонов:</span> так видят вас без сайта</span><span class="st-b">а так – с сайтом</span></div>
 
         <div class="hero__txt">
           <div data-v-cue="0 0.5 0 0.05">
@@ -526,6 +545,54 @@
   (function () {
     Vibe.mount(document.querySelector('.v-page'));
     document.documentElement.classList.add('v-ready');
+    // Первый экран: без сайта → с сайтом. Курсор: круг-линза показывает сайт только внутри себя.
+    // Телефон: касание переключает целиком, а при прокрутке до второй реплики переключается само.
+    (function () {
+      var hero = document.querySelector('.hero'); if (!hero) return;
+      var coarse = window.matchMedia('(pointer: coarse)').matches;
+      var phones = Array.prototype.slice.call(hero.querySelectorAll('.phone'));
+      var lens = document.getElementById('lens');
+      var R = 150, site = false, mx = -999, my = -999, sx = -999, sy = -999, rNow = 0, active = false, raf = 0, tapped = false;
+      function p() { return parseFloat(getComputedStyle(hero).getPropertyValue('--v-p')) || 0; }
+      function updTouch() { hero.classList.toggle('is-site', tapped || p() > 0.45); }
+      if (coarse) {
+        phones.forEach(function (el) { el.addEventListener('click', function () { tapped = !tapped; updTouch(); }); });
+        window.addEventListener('scroll', function () { requestAnimationFrame(updTouch); }, { passive: true });
+        updTouch();
+        return;
+      }
+      function local(ph) {
+        var r = ph.getBoundingClientRect(), m = new DOMMatrix(getComputedStyle(ph).transform), a = Math.atan2(m.b, m.a);
+        var dx = sx - (r.left + r.width / 2), dy = sy - (r.top + r.height / 2);
+        var c = Math.cos(a), s = Math.sin(a), img = ph.querySelector('img.alt');
+        return { x: dx * c + dy * s + ph.offsetWidth / 2 - img.offsetLeft, y: -dx * s + dy * c + ph.offsetHeight / 2 - img.offsetTop, img: img };
+      }
+      function frame() {
+        sx += (mx - sx) * 0.3; sy += (my - sy) * 0.3;
+        var tgt = site ? 2600 : (active ? R : 0);
+        if (site && !active) { mx = innerWidth / 2; my = innerHeight / 2; }
+        rNow += (tgt - rNow) * (site ? 0.12 : 0.25);
+        phones.forEach(function (ph) { var l = local(ph); l.img.style.setProperty('--lx', l.x + 'px'); l.img.style.setProperty('--ly', l.y + 'px'); l.img.style.setProperty('--lr', rNow.toFixed(1) + 'px'); });
+        lens.style.setProperty('--lx0', sx + 'px'); lens.style.setProperty('--ly0', sy + 'px');
+        lens.style.transform = 'translate(' + sx + 'px,' + sy + 'px) scale(' + (0.6 + 0.4 * Math.min(rNow / R, 1)).toFixed(3) + ')';
+        var moving = Math.abs(mx - sx) > 0.3 || Math.abs(my - sy) > 0.3 || Math.abs(tgt - rNow) > 0.5;
+        if (moving) raf = requestAnimationFrame(frame); else raf = 0;
+      }
+      function kick() { if (!raf) raf = requestAnimationFrame(frame); }
+      function setActive(on) { active = on; lens.classList.toggle('on', on && !site); hero.classList.toggle('is-lens', on); kick(); }
+      document.addEventListener('pointermove', function (e) {
+        if (e.pointerType === 'touch') return;
+        var inPhone = !!(e.target.closest && e.target.closest('.hero .phone'));
+        mx = e.clientX; my = e.clientY;
+        if (inPhone && !active) { sx = mx; sy = my; }
+        if (inPhone !== active) setActive(inPhone); else kick();
+      }, { passive: true });
+      document.addEventListener('pointerleave', function () { if (active) setActive(false); });
+      function chk() { var s = p() > 0.45; if (s !== site) { site = s; hero.classList.toggle('is-site', s); lens.classList.toggle('on', active && !s); kick(); } else if (active) kick(); }
+      window.addEventListener('scroll', function () { requestAnimationFrame(chk); }, { passive: true });
+      chk();
+    })();
+
     // На телефоне вводный текст стоит над лентой, а не первой карточкой в ней
     if (window.matchMedia('(pointer: coarse), (max-width: 860px)').matches) {
       var galAct = document.getElementById('raboty'), intro = galAct.querySelector('.gal__intro');
