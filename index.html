@@ -511,7 +511,7 @@
             <button type="button" class="chip" data-n="своего бизнеса" aria-pressed="true">Другое</button>
           </div>
           <div class="own" id="own"><input type="text" id="own-in" maxlength="60" placeholder="Например: автомойки" aria-label="Для чего сайт, своими словами"></div>
-          <p class="bubble" id="bubble" aria-live="polite">Привет, Лёва! Хочу сайт для своего бизнеса. Пишу из Telegram.</p>
+          <p class="bubble" id="bubble" aria-live="polite">Привет, Лёва! Хочу сайт для своего бизнеса. Пишу с сайта.</p>
           <div class="fin__act">
             <a class="v-btn v-btn--lg" id="go-tg" href="https://t.me/Lev_Shumilov" target="_blank" rel="noopener">Написать в Telegram</a>
             <a class="v-btn v-btn--ghost v-btn--lg" id="go-vk" href="https://vk.ru/im?sel=654547875" target="_blank" rel="noopener">Написать во ВК</a>
@@ -658,7 +658,7 @@
     var own = document.getElementById('own'), ownIn = document.getElementById('own-in');
     var tg = document.getElementById('go-tg'), vk = document.getElementById('go-vk'), toast = document.getElementById('toast');
     var niche = 'своего бизнеса';
-    function msg(from) { return 'Привет, Лёва! Хочу сайт для ' + niche + '. Пишу из ' + from + '.'; }
+    function msg(from) { return 'Привет, Лёва! Хочу сайт для ' + niche + '. Пишу ' + (from === 'Telegram' ? 'с сайта' : 'из ' + from) + '.'; }
     function tgUrl(text) { return 'https://t.me/Lev_Shumilov?text=' + encodeURIComponent(text); }
     function render() {
       bubble.textContent = msg('Telegram');
