@@ -5,4 +5,46 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
 .spam-trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}.button:disabled{opacity:.65;cursor:wait}
 
-.work--paprika{grid-column:1/-1;display:grid;grid-template-columns:1.6fr 1fr;align-items:center;gap:32px;margin-bottom:10px}.work--paprika .work-image{height:auto;padding:0;background:#191714;aspect-ratio:1200/630}.work--paprika .work-image img{width:100%;max-width:none;height:100%;object-fit:contain;border:0;border-radius:0;margin:0}.work--paprika:hover img{transform:none}.work--paprika .work-caption{padding:20px 0}.work--paprika h3{font-size:30px}.work--paprika .text-link{display:inline-block;margin-top:20px}@media(max-width:700px){.work--paprika{grid-template-columns:1fr;gap:0;margin-bottom:0}.work--paprika .work-caption{padding:20px 0}.work--paprika h3{font-size:25px}}
+/* Portfolio: one consistent scale for every project. */
+.works { gap: 24px; }
+.work { overflow: hidden; border: 1px solid #1b1f3b20; border-radius: 18px; background: #fffef8; transition: border-color .2s, box-shadow .2s; }
+.work:hover { border-color: #1b1f3b70; box-shadow: 0 8px 24px #1b1f3b0b; }
+.work-image { display: flex; justify-content: center; align-items: flex-start; height: 350px; padding: 28px 20px 0; border-radius: 0; }
+.work--paprika .work-image { background: #e8e2d6; }
+.work--shinomontazh .work-image { background: #e2e7e5; }
+.work--nogti .work-image { background: #efdfdf; }
+.work-image img { flex: none; width: min(100%, 210px); max-width: 210px; border: 6px solid var(--ink); border-radius: 27px; box-shadow: 0 12px 24px #1b1f3b1a; }
+.work-caption { padding: 23px 22px 20px; }
+.work-caption .eyebrow { font-size: 10px; line-height: 1.5; letter-spacing: .7px; }
+.work-caption h3 { margin: 10px 0 9px; font-size: 23px; }
+.work-caption p { min-height: 21px; }
+.work-open { display: flex; justify-content: space-between; align-items: center; margin-top: 23px; padding-top: 15px; border-top: 1px solid #1b1f3b20; font-size: 13px; font-weight: 600; }
+.work-open span { font-size: 20px; }
+.more-work { margin-top: 27px; }
+@media (min-width:701px) and (max-width:900px) {
+ .works { gap: 14px; }
+ .work-image { height: 300px; padding: 24px 14px 0; }
+ .work-image img { width: 165px; max-width: 100%; }
+ .work-caption { padding: 18px 14px; }
+ .work-caption h3 { font-size: 20px; }
+ .work-caption p { min-height: 40px; }
+}
+@media (max-width:700px) {
+ #raboty .section-top { margin-bottom: 26px; }
+ #raboty .section-top p:last-child { font-size: 13px; }
+ .works { gap: 22px; }
+ .work-image { height: 320px; padding: 24px 20px 0; }
+ .work-image img { width: 205px; max-width: 100%; margin: 0; }
+ .work-caption { padding: 20px; }
+ .work-caption h3 { font-size: 23px; }
+ .work-open { margin-top: 18px; }
+}
+
+/* Readable captions and a CTA that makes room for the form. */
+.work-caption .eyebrow { font-size: 11px; }
+.hero-note { font-size: 13px; }
+.mobile-cta[hidden] { display: none; }
+@media(max-width:700px) {
+ .mobile-cta { bottom: max(12px, env(safe-area-inset-bottom)); }
+ .hero-note { font-size: 12px; }
+}

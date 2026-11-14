@@ -2,6 +2,19 @@
   const form = document.getElementById('brief');
   const status = document.getElementById('form-status');
   let sending = false;
+  const mobileCta = document.querySelector('.mobile-cta');
+  let formVisible = false;
+  const syncCta = () => {
+    mobileCta.hidden = formVisible || form.contains(document.activeElement);
+  };
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      formVisible = entry.isIntersecting;
+      syncCta();
+    }).observe(form);
+  }
+  form.addEventListener('focusin', syncCta);
+  form.addEventListener('focusout', () => requestAnimationFrame(syncCta));
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (sending || !form.reportValidity()) return;
