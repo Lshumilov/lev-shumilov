@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lshumilov.github.io/lev-shumilov/sitemap.xml
