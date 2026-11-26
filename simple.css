@@ -52,3 +52,6 @@
 @media(max-width:700px){.example-image{aspect-ratio:4/3;margin:10px 10px 0}.example-copy{padding:21px}.example-image.phone{padding-top:25px}.example-image.phone img{width:53%;max-width:180px}.service-contact .button{min-height:65px;font-size:18px}.example-open:after{font-size:12px}}
 
 .simple-hero .hero-case,.simple-hero .hero-case-image img{transition:none;will-change:transform}.simple-hero>div:first-child{will-change:transform}.hero-title-line{padding-inline:25px;margin-inline:-25px}.hero-title-line>span{will-change:transform}@media print{.simple-hero .hero-case,.simple-hero>div:first-child,.hero-title-line>span,.hero-case-image img{transform:none!important}}
+
+/* Telegram bot entry in the contact section. */
+.telegram-contact{margin-top:26px;max-width:100%}.telegram-contact .bot-cta{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%;box-sizing:border-box;min-height:68px;padding:20px 24px;line-height:1.35;text-align:left;white-space:normal}.bot-cta span{flex:none}.bot-contact-note{font-size:14px;line-height:1.5;margin:12px 0 20px;color:#626b74}.telegram-contact .text-link{overflow-wrap:anywhere}@media(max-width:700px){.telegram-contact .bot-cta{font-size:16px;padding:18px 20px;min-height:64px}}
