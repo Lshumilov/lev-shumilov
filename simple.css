@@ -55,3 +55,5 @@
 
 /* Telegram bot entry in the contact section. */
 .telegram-contact{margin-top:26px;max-width:100%}.telegram-contact .bot-cta{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%;box-sizing:border-box;min-height:68px;padding:20px 24px;line-height:1.35;text-align:left;white-space:normal}.bot-cta span{flex:none}.bot-contact-note{font-size:14px;line-height:1.5;margin:12px 0 20px;color:#626b74}.telegram-contact .text-link{overflow-wrap:anywhere}@media(max-width:700px){.telegram-contact .bot-cta{font-size:16px;padding:18px 20px;min-height:64px}}
+
+#form-status.is-success{font-size:20px;font-weight:600;line-height:1.5;color:#237341;margin-top:18px}@media(max-width:700px){#form-status.is-success{font-size:18px}}

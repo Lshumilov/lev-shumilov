@@ -25,6 +25,7 @@
       status.textContent = 'Форма пока не подключена. Напишите мне напрямую в Telegram по ссылке рядом.';
       return;
     }
+    status.classList.remove('is-success');
     sending = true;
     const button = form.querySelector('button[type="submit"]');
     button.disabled = true;
@@ -41,6 +42,7 @@
       if (!response.ok || result.ok !== true) throw new Error('send failed');
       const unchanged=Object.entries(snapshot).every(([key,value])=>form.elements[key]?.value===value);
       if(unchanged){form.reset();form.elements.service.value=snapshot.service;}
+      status.classList.add('is-success');
       status.textContent = 'Заявка отправлена! Лёва свяжется с вами по указанному контакту.'+(unchanged?'':' Изменения, сделанные во время отправки, оставлены в форме.');
     } catch {
       status.textContent = 'Не удалось подтвердить отправку. Ваши данные сохранены в форме. Попробуйте позже или напишите мне в Telegram.';
